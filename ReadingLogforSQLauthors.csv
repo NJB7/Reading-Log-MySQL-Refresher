@@ -1,0 +1,16 @@
+﻿first_name ,last_name ,birth_country ,current_country,country_details ,gender,bipoc,lgbtq,disabled,author_details
+Clayton,Thomas-Muller,Canada,Canada,Cree,M,1,0,0,NULL
+Robert M.,Sapolsky,US,US,NULL,M,0,0,0,NULL
+Dina,Gilio-Whitaker,US,US,Colville Confederated Tribes,F,1,0,0,NULL
+Monica,Gagliano,Australia,Australia,NULL,F,0,0,0,NULL
+Katherena,Vermette,Canada,Canada,Métis,F,1,0,0,NULL
+H. Craig,Heller,US,US,NULL,M,0,0,0,NULL
+Yrsa,Sigurðardóttir,Iceland,Iceland,NULL,F,0,0,0,NULL
+Bernd,Brunner,Canada,Canada,NULL,M,0,0,0,NULL
+Emma,Marris,US,US,NULL,F,0,0,0,NULL
+Linda Kay,Klein,US,US,NULL,F,0,0,0,NULL
+Stephen,Nowicki,US,US,NULL,M,0,0,0,NULL
+Thich Nhat,Hanh,Vietnam,France,NULL,M,1,0,0,NULL
+Gayle Tzemach,Lemmon,US,US,NULL,F,0,0,0,NULL
+Gord,Hill,Canada,Canada,Kwakwaka'wakw,M,1,0,0,NULL
+Mary Siisip,Geniusz,Canada,Canada,Anishinaabe,F,1,0,0,NULL
