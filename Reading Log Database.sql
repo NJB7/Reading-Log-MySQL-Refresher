@@ -14,7 +14,15 @@ FROM
 SELECT
   *
 FROM
+  imprint;
+SELECT
+  *
+FROM
   translator;
+SELECT
+  *
+FROM
+  readbook;
 -------------------------------------------------------CREATE AUTHOR--------------------------------------------------------------
   --   CREATE TABLE author(
   --     author_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -724,7 +732,7 @@ FROM
 SELECT
   *
 FROM
-  publisher;
+  imprint;
 -------------------------------------------CREATE READ TABLE------------------------------------------------------------
   -- CREATE TABLE readbook(
   --   read_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -735,59 +743,71 @@ FROM
   --   review VARCHAR(1000),
   --   book_id INT
   -- );
-INSERT INTO
-  readbook (
-    if_read,
-    started,
-    finished,
-    rating,
-    review,
-    book_id
-  )
-VALUES
-  (1, "2022-01-30", "2022-01-30", 4, NULL, 2);
+  -- INSERT INTO
+  --   readbook (
+  --     if_read,
+  --     started,
+  --     finished,
+  --     rating,
+  --     review,
+  --     book_id
+  --   )
+  -- VALUES
+  --   (1, "2022-01-30", "2022-02-03", 5, NULL, 3),
+  --   (1, "2022-02-03", "2022-02-05", 3, NULL, 4),
+  --   (1, "2022-02-05", "2022-02-06", 4, NULL, 5),
+  --   (1, "2022-02-03", "2022-02-10", 4, NULL, 6),
+  --   (1, "2022-02-11", "2022-02-15", 4, NULL, 7),
+  --   (1, "2022-01-02", "2022-02-19", 3, NULL, 8),
+  --   (1, "2022-02-10", "2022-02-28", 4, NULL, 9),
+  --   (1, "2022-02-23", "2022-02-25", 5, NULL, 10),
+  --   (1, "2020-11-04", "2022-02-26", 4, NULL, 11),
+  --   (1, "2021-12-17", "2022-02-26", 5, NULL, 12),
+  --   (1, "2021-12-23", "2022-02-27", 5, NULL, 13),
+  --   (1, "2021-11-27", "2022-02-28", 4, NULL, 14),
+  --   (1, "2021-12-30", "2022-03-05", 5, NULL, 15),
+  --   (1, "2022-02-27", "2022-03-12", 4, NULL, 16),
+  --   (1, "2022-03-12", "2022-03-14", 4, NULL, 17),
+  --   (1, "2022-02-27", "2022-03-19", 5, NULL, 18),
+  --   (1, "2021-12-21", "2022-03-21", 4, NULL, 19);
 SELECT
   *
 FROM
   readbook;
 --------------------------------------------------------CREATE TRANSLATOR----------------------------------------------------------
-  CREATE TABLE translator(
-    translator_id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    birth_country VARCHAR(30),
-    current_country VARCHAR(30),
-    country_details VARCHAR(50),
-    book_id INT,
-    publisher_id INT
-  );
-INSERT INTO
-  translator (
-    first_name,
-    last_name,
-    birth_country,
-    current_country,
-    country_details,
-    book_id,
-    publisher_id
-  )
-VALUES
-  ('', '', '', '', NULL,,),
-  ('', '', '', '', NULL,,),
-  ('', '', '', '', NULL,,);
--- ('', '', '', '', '', , ),
-  -- ('', '', '', '', '', , ),
+  -- CREATE TABLE translator(
+  --   translator_id INT PRIMARY KEY AUTO_INCREMENT,
+  --   first_name VARCHAR(50),
+  --   last_name VARCHAR(50),
+  --   birth_country VARCHAR(30),
+  --   current_country VARCHAR(30),
+  --   country_details VARCHAR(50)
+  -- );
+  -- INSERT INTO
+  --   translator (first_name, last_name)
+  -- VALUES
+  --   ('Victoria', 'Cribb');
+  -- ALTER TABLE
+  --   book
+  -- ADD
+  --   FOREIGN KEY (translator_id) REFERENCES translator(translator_id) ON DELETE SET NULL;
+  -- UPDATE
+  --   book
+  -- SET
+  --   translator_id = 1
+  -- WHERE
+  --   book_id = 7;
+SELECT
+  *
+FROM
+  book
+WHERE
+  original_language != "English";
 SELECT
   *
 FROM
   translator;
--- ALTER TABLE
-  --   readbook
-  -- ADD
-  --   FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE
-  -- SET
-  --   NULL;
-  -------------------------------------------------------CHECK WORK----------------------------------------------------------
+-------------------------------------------------------CHECK WORK----------------------------------------------------------
 SELECT
   *
 FROM
