@@ -37,33 +37,33 @@ FROM
   --     disabled TINYINT,
   --     author_details VARCHAR(50)
   --   );
-  -- INSERT INTO
-  --   author (
-  --     first_name,
-  --     last_name,
-  --     birth_country,
-  --     current_country,
-  --     country_details,
-  --     gender,
-  --     bipoc,
-  --     lgbtq,
-  --     disabled,
-  --     author_details
-  --   )
-  -- VALUES
-  --   (
-  --     'Clayton',
-  --     'Thomas-Muller',
-  --     'Canada',
-  --     'Canada',
-  --     'Cree',
-  --     "M",
-  --     1,
-  --     0,
-  --     0,
-  --     NULL
-  --   ),
-  --   (
+INSERT INTO
+  author (
+    first_name,
+    last_name,
+    birth_country,
+    current_country,
+    country_details,
+    gender,
+    bipoc,
+    lgbtq,
+    disabled,
+    author_details
+  )
+VALUES
+  (
+    'Michel',
+    'de Montaigne',
+    'France',
+    'France',
+    NULL,
+    "M",
+    0,
+    0,
+    0,
+    NULL
+  );
+--   (
   --     'Robert M.',
   --     'Sapolsky',
   --     'US',
@@ -313,9 +313,6 @@ FROM
   --   CREATE TABLE book(
   --     book_id INT PRIMARY KEY AUTO_INCREMENT,
   --     book_title VARCHAR(1000),
-  --     started_reading DATE,
-  --     finished_reading DATE,
-  --     if_read TINYINT(1),
   --     pages INT,
   --     book_format VARCHAR(20),
   --     fiction_non_fiction VARCHAR(20),
@@ -616,6 +613,40 @@ FROM
   --     '2000-01-01',
   --     19);
   -- ('', '', '', , , '', '', '', '', '', '', '', , , , "");
+INSERT INTO
+  book (
+    book_title,
+    pages,
+    book_format,
+    fiction_non_fiction,
+    frontlist_backlist,
+    original_language,
+    language_read,
+    my_source,
+    bookshelf,
+    pub_date,
+    author_id,
+    publisher_id,
+    imprint_id,
+    translator_id
+  )
+VALUES
+  (
+    'Essais',
+    335,
+    'Paper',
+    'N',
+    'B',
+    'French',
+    'French',
+    'Home',
+    'french-nonfiction',
+    '1595-01-01',
+    20,
+    16,
+    8,
+    NULL
+  );
 SELECT
   *
 FROM
@@ -623,11 +654,12 @@ FROM
 SELECT
   *
 FROM
-  author;
--- ALTER TABLE
-  --   author
-  -- ADD
-  --   book_id INT;
+  publisher;
+-- SHOW CREATE TABLE author;
+  -- ALTER TABLE
+  --     author
+  --   ADD
+  --     book_id INT;
   -- ALTER TABLE
   --   author
   -- ADD
@@ -635,7 +667,9 @@ FROM
   -- SET
   --   NULL;
   -- ALTER TABLE
-  --   book DROP if_read;
+  --   author DROP FOREIGN KEY author_ibfk_2;
+  -- ALTER TABLE
+  --   author DROP book_id;
   -- ALTER TABLE
   --   book
   -- ADD
@@ -661,25 +695,15 @@ FROM
   --   author_id INT,
   --   book_id INT
   -- );
-  -- INSERT INTO
-  --   publisher (
-  --     publisher_name,
-  --     imprint_name,
-  --     city,
-  --     country,
-  --     author_id,
-  --     book_id
-  --   )
-  -- VALUES
-  --   (
-  --     'Penguin Random House Canada',
-  --     'Allen Lane',
-  --     'Toronto',
-  --     'Canada',
-  --     1,
-  --     1
-  --   ),
-  --   (
+INSERT INTO
+  publisher (
+    publisher_name,
+    city,
+    country
+  )
+VALUES
+  ('Éditions Larousse', 'Paris', 'France');
+--   (
   --     'The Great Courses',
   --     'NULL',
   --     'Chantilly',
@@ -716,15 +740,10 @@ FROM
   --     imprint_name VARCHAR(50),
   --     publisher_id INT
   --   );
-  -- INSERT INTO
-  --   imprint (imprint_name, publisher_id)
-  -- VALUES
-  --   ('Allen Lane', 1),
-  --   ('Hamish Hamilton', 1),
-  --   ('Hodder & Stoughton', 6),
-  --   ('Atria Books', 8),
-  --   ('HarperOne', 4),
-  --   ('Penguin Press', 1);
+INSERT INTO
+  imprint (imprint_name, publisher_id)
+VALUES
+  ('Larousse Kingfisher Chambers', 16);
 SELECT
   *
 FROM
@@ -743,18 +762,21 @@ FROM
   --   review VARCHAR(1000),
   --   book_id INT
   -- );
-  -- INSERT INTO
-  --   readbook (
-  --     if_read,
-  --     started,
-  --     finished,
-  --     rating,
-  --     review,
-  --     book_id
-  --   )
-  -- VALUES
-  --   (1, "2022-01-30", "2022-02-03", 5, NULL, 3),
-  --   (1, "2022-02-03", "2022-02-05", 3, NULL, 4),
+INSERT INTO
+  readbook (
+    if_read,
+    started,
+    finished,
+    rating,
+    book_id
+  )
+VALUES
+  (0, "2022-03-23", NULL, NULL, 21);
+SELECT
+  *
+FROM
+  book;
+--   (1, "2022-02-03", "2022-02-05", 3, NULL, 4),
   --   (1, "2022-02-05", "2022-02-06", 4, NULL, 5),
   --   (1, "2022-02-03", "2022-02-10", 4, NULL, 6),
   --   (1, "2022-02-11", "2022-02-15", 4, NULL, 7),
@@ -770,11 +792,12 @@ FROM
   --   (1, "2022-03-12", "2022-03-14", 4, NULL, 17),
   --   (1, "2022-02-27", "2022-03-19", 5, NULL, 18),
   --   (1, "2021-12-21", "2022-03-21", 4, NULL, 19);
-SELECT
-  *
-FROM
-  readbook;
---------------------------------------------------------CREATE TRANSLATOR----------------------------------------------------------
+  -- SELECT
+  --   *
+  -- FROM
+  --   readbook;
+  --   ALTER TABLE readbook DROP review;
+  -- --------------------------------------------------------CREATE TRANSLATOR----------------------------------------------------------
   -- CREATE TABLE translator(
   --   translator_id INT PRIMARY KEY AUTO_INCREMENT,
   --   first_name VARCHAR(50),
@@ -825,6 +848,7 @@ SELECT
 FROM
   translator;
 -------------------------------------------------------QUERIES----------------------------------------------------------
+  # first 10 authors by last name
 SELECT
   *
 FROM
@@ -834,27 +858,27 @@ ORDER BY
   first_name
 LIMIT
   10;
-SELECT
-  last_name AS "Surname"
-FROM
-  author;
+# Total alphabetized list of distinct last names of authors
 SELECT
   DISTINCT last_name,
   first_name
 FROM
-  author
+  author ## Total number of authors
 ORDER BY
   last_name;
+## Total number of authors
 SELECT
   COUNT(author_id)
 FROM
   author;
+## All American authors
 SELECT
   *
 FROM
   author
 WHERE
   birth_country = "US";
+## Canadian authors with country details (e.g. Indigenous)
 SELECT
   *
 FROM
@@ -862,6 +886,7 @@ FROM
 WHERE
   country_details IS NOT NULL
   AND birth_country = "Canada";
+## Number of BIPOC, LGBTQ, Disabled authors, by Gender
 SELECT
   gender,
   SUM(bipoc),
@@ -871,6 +896,7 @@ FROM
   author
 GROUP BY
   gender;
+## Number of female authors
 SELECT
   gender,
   COUNT(gender)
@@ -878,36 +904,35 @@ FROM
   author
 WHERE
   gender = "F";
-SELECT
-  *
-FROM
-  author
-WHERE
-  last_name LIKE "%m%";
+## All authors with last name starting with "T"
 SELECT
   *
 FROM
   author
 WHERE
   last_name LIKE "T%";
+## All authors with last name containing "W"
 SELECT
   *
 FROM
   author
 WHERE
   last_name LIKE "%W%";
+## All authors with birth country beginning with "U"
 SELECT
   *
 FROM
   author
 WHERE
   birth_country LIKE "U%";
+##All books started from 2022 on
 SELECT
   *
 FROM
   readbook
 WHERE
   started > "2022-01-01";
+#All books read in January of any year
 SELECT
   *
 FROM
@@ -916,6 +941,7 @@ WHERE
   started LIKE "____-01%";
 ---------------------------------QUERIES WITH UNIONS & JOINS--------------------------------------
   ---Note: Unions must have same number of columns and similar datatypes
+  ## List of all author last names, bookt titles, publishers
 SELECT
   last_name as "Name"
 FROM
@@ -930,6 +956,7 @@ SELECT
   publisher_name
 FROM
   publisher;
+## All books with their author first and last name, publisher
 SELECT
   book_title AS "Title",
   author.first_name AS "First Name",
@@ -939,18 +966,21 @@ FROM
   book
   JOIN publisher ON book.publisher_id = publisher.publisher_id
   JOIN author ON book.author_id = author.author_id;
+## All books with their publishers
 SELECT
   book_title AS "Title",
   publisher.publisher_name AS "Publisher"
 FROM
   book
   RIGHT JOIN publisher ON book.publisher_id = publisher.publisher_id;
+## Alphabetize complete list of publishers
 SELECT
   publisher_name AS "Publisher"
 FROM
   publisher
 ORDER BY
   publisher_name;
+## Books read in March (run in March) 2022
 SELECT
   book.book_title AS "Title",
   CONCAT(author.first_name, " ", author.last_name) AS "Author",
@@ -961,4 +991,28 @@ FROM
   JOIN book ON readbook.book_id = book.book_id
   JOIN author ON book.author_id = author.author_id
 WHERE
-  finished > "2022-01-01";
+  finished > "2022-03-01";
+## List of unread books, not including currently reading
+SELECT
+  book.book_title AS "Title",
+  CONCAT(author.first_name, " ", author.last_name) AS "Author",
+  started AS "Started Reading"
+FROM
+  readbook
+  JOIN book ON readbook.book_id = book.book_id
+  JOIN author ON book.author_id = author.author_id
+WHERE
+  if_read = 0
+  AND started IS NULL;
+## List of currently reading books
+SELECT
+  book.book_title AS "Title",
+  CONCAT(author.first_name, " ", author.last_name) AS "Author",
+  started AS "Started Reading"
+FROM
+  readbook
+  JOIN book ON readbook.book_id = book.book_id
+  JOIN author ON book.author_id = author.author_id
+WHERE
+  if_read = 0
+  AND started IS NOT NULL;
