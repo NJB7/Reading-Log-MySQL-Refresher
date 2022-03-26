@@ -681,6 +681,12 @@ FROM
   --   imprint_id = NULL
   -- WHERE
   --   book_id = 19;
+UPDATE
+  book
+SET
+  author_id = 21
+WHERE
+  book_id = 21;
 SELECT
   *
 FROM
