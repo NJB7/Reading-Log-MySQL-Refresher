@@ -1022,3 +1022,113 @@ FROM
 WHERE
   if_read = 0
   AND started IS NOT NULL;
+--------------------------------------------------NESTED QUERIES--------------------------------------------------------------
+  ## All books by those publishers with at least 1 book >300 pages
+SELECT
+  book.book_title,
+  book.pages,
+  publisher.publisher_name
+FROM
+  publisher
+  JOIN book ON book.publisher_id = publisher.publisher_id
+WHERE
+  book.publisher_id IN (
+    SELECT
+      book.publisher_id
+    FROM
+      book
+    WHERE
+      book.pages > 300
+  );
+# All books with more than 300 pages published and display publishers -
+SELECT
+  book.book_title,
+  book.pages,
+  publisher.publisher_name
+FROM
+  publisher
+  JOIN book ON book.publisher_id = publisher.publisher_id
+WHERE
+  book.pages > 300;
+# Authors who have books published by companies in Toronto, along with some of their author_details
+  # Can use = instead of IN and limit to 1 if the result will only be one person
+SELECT
+  author.first_name,
+  author.last_name,
+  author.gender,
+  author.bipoc
+FROM
+  publisher
+  JOIN book ON book.publisher_id = publisher.publisher_id
+  JOIN author ON book.author_id = author.author_id
+WHERE
+  publisher.publisher_id IN (
+    SELECT
+      publisher.publisher_id
+    FROM
+      publisher
+    WHERE
+      publisher.city = "Toronto"
+  );
+# publishers by number of books published
+SELECT
+  publisher.publisher_name,
+  COUNT(book_id) AS "# of books published"
+FROM
+  publisher
+  JOIN book ON book.publisher_id = publisher.publisher_id
+WHERE
+  publisher.country = "Canada"
+GROUP BY
+  publisher.publisher_name;
+#Display the publishing companies in Canada order of who publishes the most books
+SELECT
+  publisher.publisher_name,
+  COUNT(book_id) AS "# of books published"
+FROM
+  publisher
+  JOIN book ON book.publisher_id = publisher.publisher_id
+WHERE
+  publisher.country = "Canada"
+GROUP BY
+  publisher.publisher_name
+LIMIT
+  1;
+------------------------------------------------------Temp Tables-----------------------------------------------------
+  ## List of currently reading books - table could be used by others with access and will need to be manually deleted
+  CREATE TABLE curently_reading(
+    SELECT
+      book.book_title AS "Title",
+      CONCAT(author.first_name, " ", author.last_name) AS "Author",
+      started AS "Started Reading"
+    FROM
+      readbook
+      JOIN book ON readbook.book_id = book.book_id
+      JOIN author ON book.author_id = author.author_id
+    WHERE
+      if_read = 0
+      AND started IS NOT NULL
+  );
+SELECT
+  *
+FROM
+  curently_reading;
+# Books read in 2022 (run in April) & ratings - temp table that I can run queries ON
+  # the second select after the closed bracked is the query on the temp table
+  WITH read_this_year AS(
+    SELECT
+      book.book_title AS "Title",
+      CONCAT(author.first_name, " ", author.last_name) AS "Author",
+      finished AS "Date Read",
+      rating AS "Rating"
+    FROM
+      readbook
+      JOIN book ON readbook.book_id = book.book_id
+      JOIN author ON book.author_id = author.author_id
+    WHERE
+      finished > "2022-01-01"
+  )
+SELECT
+  *
+FROM
+  read_this_year;
