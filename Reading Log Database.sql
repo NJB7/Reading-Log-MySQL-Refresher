@@ -1132,3 +1132,22 @@ SELECT
   *
 FROM
   read_this_year;
+# Alternate temp table method - read this year with ratings (same as above)
+  # Will disappear when the session is closed
+  CREATE TEMPORARY TABLE read_this_year AS(
+    SELECT
+      book.book_title AS "Title",
+      CONCAT(author.first_name, " ", author.last_name) AS "Author",
+      finished AS "Date Read",
+      rating AS "Rating"
+    FROM
+      readbook
+      JOIN book ON readbook.book_id = book.book_id
+      JOIN author ON book.author_id = author.author_id
+    WHERE
+      finished > "2022-01-01"
+  );
+SELECT
+  *
+FROM
+  read_this_year;
